@@ -1,0 +1,87 @@
+.content {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, #FDFD96, #B4D9E7);
+    h3 {
+            font-size: 38px;
+            color: #333333;
+            
+    }
+    .firstSectionContent ,
+    .secondSectionContent {
+        background-color:  rgba(148,187,233,1);
+        width: 30%;
+        height: 70%;
+        padding: 3%;
+        display: flex;
+        flex-direction: column;
+        border-radius: 6px;
+        align-items: center;
+        justify-content: center;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        font-weight: bold;
+        font-size: 26px;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+        input {
+            width: 300px;
+        }
+        span {
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            color: rgb(77, 77, 185);
+        }
+        
+    }
+    .firstSectionContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .contentSection {
+            button {
+                height: 40px;
+                width: 300px;
+                border: none;
+                border-radius: 6px;
+                background-color: #F7D002;
+                color: black;
+                font-weight: bold;
+                font-size: 16px;
+            }
+        }
+    }
+    .secondSectionContent {
+        background-image: url('../public/img/login.jpg');
+        background-size: cover;
+        background-position: center;   
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+        width: 30%;
+        font-size: 26px;
+        font-weight: bold;
+        &:hover {
+            .textoDescriptivo {
+                display: flex;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #ffffff;
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+        }
+        .textoDescriptivo {
+            
+            display: none;
+        }
+          
+    }
+}

@@ -1,0 +1,39 @@
+
+.container {
+    width: 300px;
+    border-radius: 6px;
+   
+    .image {
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    .contentCard {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 1%;
+
+        button {
+            height: 30px;
+            width: 150px;
+            border-radius: 13px;
+            border: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: rgb(238,174,202);
+        }
+
+        .headerCard {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+        .sectionCard {
+            cursor: pointer;
+        }
+    }
+}

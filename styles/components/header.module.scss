@@ -1,0 +1,101 @@
+.headerContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 60px;
+    align-items: center;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+
+    .firstSectionMenu {
+        display: flex;
+        flex-direction: row;
+        gap: 80px;
+        padding-left: 20px;
+        align-items: center;
+        width: 100%;
+        color: #F5F5DC;
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+      }
+    @keyframes borderMenu {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 0 0 0 rgba(255, 0, 0, 0);
+          }
+          25% {
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 1), 0 0 0 0 rgba(255, 0, 0, 0);
+          }
+          50% {
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 1);
+          }
+          75% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 0 0 0 rgba(255, 0, 0, 0);
+          }
+        
+    }
+    .active {
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 1);
+        border-radius: 6px;
+    }
+    li {
+        display: flex;
+        margin-right: 60px;
+        height: 45px;
+        align-items: center;
+        font-size: 17px;
+        font-weight: bold;
+        & > :active {
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 1);
+        }
+        & > :hover {
+            display: flex;
+            height: 45px;
+            align-items: center;
+            border-radius: 6px;
+            animation: borderMenu 2s infinite linear;
+        }
+    }
+
+      
+    a {
+        text-decoration: none;
+        color:  #F5F5F5;
+        padding: 5px;
+      }
+
+    }
+
+    .secondSectionMenu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 40px;
+        padding-right: 30px;
+        span {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        input {
+            height: 35px;
+            border-radius: 6px;
+            outline: none;
+            border: none;
+            width: 200px;
+            text-indent: 20px;
+            transition: width 0.6s ease;
+        }
+        
+        input:focus {
+            transition: width 0.6s ease;
+            width: 600px;
+        }
+    }
+      
+}

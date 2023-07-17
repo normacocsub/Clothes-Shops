@@ -1,0 +1,32 @@
+.content {
+    padding: 0% 2% 0% 2%;
+    .cardsContent {
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        gap: 20px;  
+    }
+
+    @media (max-width: 1650px) {
+        .cardsContent {
+            grid-template-columns: auto auto auto auto;
+        }
+    }
+    @media (max-width: 1320px) {
+        .cardsContent {
+            grid-template-columns: auto auto auto;
+        }
+    }
+    @media (max-width: 1000px) {
+        .cardsContent {
+            grid-template-columns: auto auto;
+        }
+    }
+
+    
+    .imageContainer {
+        position: relative;
+        height: 400px;
+        z-index: 0;
+    }
+    
+}

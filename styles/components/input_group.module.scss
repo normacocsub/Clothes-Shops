@@ -1,0 +1,40 @@
+.formGroup {
+    position: relative;
+    margin-bottom: 20px;
+    input {
+        width: 100%;
+        padding: 8px;
+        height: 45px;
+        border: 1px solid #ccc;
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - -10px), 8px calc(100% - -15px), 0 calc(100% - -10px));
+        border-radius: 6px;
+      }
+
+      
+    label {
+        position: absolute;
+        top: calc(100% - 35px);
+        left: 8px;
+        font-size: 14px;
+        color: #999;
+        pointer-events: none;
+        transition: top 0.2s ease-out;
+        background-color: transparent;
+        border-radius: 6px;
+        padding: 0 4px;
+        
+      }
+
+      input:focus ~ label,
+      input:valid ~ label {
+        top: calc(100% - 50px);
+        font-size: 12px;
+        border-top: 1px solid #999;
+        background-color: #fff;
+      }
+
+      input:focus {
+        border: 1px solid gray;
+        outline: none;
+      } 
+}

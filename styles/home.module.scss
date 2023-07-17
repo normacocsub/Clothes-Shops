@@ -1,0 +1,48 @@
+
+.categoriaSection {
+    text-align: center;
+    h2 {
+        font-size: 28px;
+        font-weight: bold;
+    }
+    .categorias {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        justify-content: center;
+    }
+}
+.imageContainer {
+    position: relative;
+    width: 100%;
+    height: 500px; 
+
+    .textoContainer {
+        position: absolute;
+        top: 50%;
+        left: 10%;
+        transform: translate(-50%, -50%);
+        text-align: left;
+        backdrop-filter: blur(4px);
+        background-color: rgba(255, 255, 255, 0.3); 
+        padding: 20px;
+        border-radius: 6px;
+        h1 {
+            font-size: 30px;
+        }
+        button {
+            height: 40px;
+            width: 150px;
+            border-radius: 13px;
+        }
+        .textoTitulo,
+        .textoSubTitulo {
+            color: #ffffff;
+            font-weight: bold;
+        }
+    }
+    
+  }
+  
+  
+  
