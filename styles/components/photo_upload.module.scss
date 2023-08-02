@@ -1,0 +1,26 @@
+.container {
+    position: relative;
+  }
+  
+  .uploadButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 6px;
+    border: 2px dashed #ccc;
+    cursor: pointer;
+  }
+  
+  .fileInput {
+    display: none;
+  }
+  
+  .previewImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 6px;
+  }
+  

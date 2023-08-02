@@ -1,0 +1,89 @@
+.content {
+    padding: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 150px;
+    .firstSection {
+        .image {
+            border-radius: 6px;
+        }
+    }
+    .secondSection {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        .buttonShop {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            button {
+                height: 40px;
+                width: 200px;
+                border-radius: 20px;
+                background-color: white;
+                border: 2px solid rgb(238,174,202);
+                cursor: pointer;
+                font-size: 16px;
+            }
+            button:first-child {
+                background-color :rgb(238,174,202);
+                color: white;
+                & :hover {
+                    background-color :rgb(174, 90, 127);
+                }
+            }
+        }
+        .itemsCount {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 50px;
+            gap: 40px;
+            .contador {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                align-content: center;
+                border:  1px solid rgb(184, 174, 174);
+                gap: 30px;
+                padding: 5px 0px 5px 0px;
+                border-radius: 13px;
+                
+                div {
+                    display: flex;
+                    align-items: center;
+                    font-size: 22px;
+                    font-weight: bold;
+                    justify-content: center;
+                    width: 30px;
+                }
+                div:hover {
+                    color: rgb(238,174,202);
+                    cursor: pointer;
+                }
+            }
+        }
+        .precioContainer {
+            width: 100%;
+            .precio {
+                font-size: 25px;
+                font-weight: bold;
+                margin: 50px 0px 50px 0px;
+            }
+        }
+        
+        h2 {
+            font-size: 30px;
+            min-width: 450px;
+        }
+        hr {
+            
+            background-color: rgb(210, 197, 197);
+            border: 1px solid rgb(234, 234, 234);
+            
+        }
+    }
+}

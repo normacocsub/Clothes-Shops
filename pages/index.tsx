@@ -2,10 +2,11 @@ import Image from "next/image";
 import Layout from "../components/layout";
 import styles from "../styles/home.module.scss"
 import CardCategory from "../components/card_category";
+import { useRouter } from "next/router";
 
 
 export default function Home() {
-
+  const router = useRouter();
   const categorias = [{
     categoria: 'Camisas', urlImage: '/img/categories/camisa.jpg'},
     {categoria: 'Chaquetas', urlImage: '/img/categories/chaquetas.jpg'},
@@ -22,7 +23,7 @@ export default function Home() {
           <div className={styles.textoContainer}>
             <h1 className={styles.textoTitulo}>Tienda de Ropa</h1>
             <h2 className={styles.textoSubTitulo}>Descubre las últimas tendencias</h2>
-            <button>Explorar</button>
+            <button onClick={() => router.push('/clothets')}>Explorar</button>
           </div>
         </div>
 

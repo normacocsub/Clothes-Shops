@@ -1,0 +1,102 @@
+.content {
+    .closeCarrito {
+        font-size: 30px;
+        display: flex;
+        padding: 2% 2% 0% 0%;
+        justify-content: flex-end;
+        width: 100%;
+        svg {
+            cursor: pointer;
+        }
+        svg:hover {
+            color: red;
+        }
+    }
+    .containerSection {
+        padding: 2%;
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+    }
+    .firstSection {
+        border: 1px solid rgb(238,174,202);
+        border-radius: 6px;
+        width: 60%;
+        height: 80vh;
+        overflow-y: auto;
+        .items {
+            display: flex;
+            flex-direction: column;
+            padding: 0% 2% 2%;
+            .item {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-around;
+                .iconDelete {
+                    font-size: 30px;
+                }
+                .iconDelete:hover {
+                    color: red;
+                }
+                .info {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 20px;
+                    span:first-child {
+                        font-weight: bold;
+                    }
+                    .contador {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        align-content: center;
+                        border:  1px solid rgb(184, 174, 174);
+                        gap: 30px;
+                        padding: 5px 0px 5px 0px;
+                        border-radius: 13px;
+                        
+                        div {
+                            display: flex;
+                            align-items: center;
+                            font-size: 22px;
+                            font-weight: bold;
+                            justify-content: center;
+                            width: 30px;
+                        }
+                        div:hover {
+                            color: rgb(238,174,202);
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .secondSection {
+        border: 1px solid rgb(238,174,202);
+        border-radius: 6px;
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        font-size: 25px;
+        font-weight: bold;
+        align-items: center;
+        button {
+            height: 50px;
+            width: 200px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: rgb(238,174,202);
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: white;
+            border: 1px solid rgb(238,174,202);
+        }
+    }
+}

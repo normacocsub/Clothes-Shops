@@ -1,0 +1,38 @@
+.content {
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .formContainer {
+        width: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        select {
+            height: 45px;
+            color: #999;
+            outline: none;
+            margin-bottom: 10px;
+        }
+        input, select {
+            width: 400px;
+            border: 1px solid #ccc;
+            
+            border-radius: 6px;
+        }
+        button {
+            height: 40px;
+            border: none;
+            width: 250px;
+            border-radius: 6px;
+            background-color: rgb(238,174,202);
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: white;
+            border: 1px solid rgb(238,174,202);
+        }
+    }
+}

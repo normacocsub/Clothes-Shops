@@ -1,9 +1,23 @@
+import { useEffect, useState } from "react"
 import CardClothes from "../../components/card_clothes"
 import Layout from "../../components/layout"
+import { apiRestGet } from "../../services/auth"
 import styles from "../../styles/clothets.module.scss"
 import Image from "next/image"
 const Clotches = () => {
+    const [productos, setProductos] = useState([])
+    const getProducts = async () => {
+        const response = await apiRestGet('producto');
+        if (response.length > 0) {
+            setProductos(response);
+        }
+    }
+
+    useEffect(() => {
+        getProducts()
+    }, [])
     return <Layout>
+        
         <div className={styles.content}>
             <div className={styles.imageContainer}>
                 {/* reemplazar aleatoreamente */}
@@ -13,8 +27,8 @@ const Clotches = () => {
                 <h2>Ropa para ti</h2>
                 <div className={styles.cardsContent}>
                     {
-                       [1,2,3,4,5,6,7,8,9,0,1,3].map((item, index)  => {
-                        return <CardClothes key={index}/>
+                       (productos ?? []).map((item, index)  => {
+                        return <CardClothes {...item} key={index}/>
                        }) 
                     }
                 </div>
