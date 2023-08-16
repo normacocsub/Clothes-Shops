@@ -9,77 +9,89 @@ import LoadingModal from "../../../../components/modal_loading";
 
 const RegistroClothes = () => {
 
-        const router = useRouter();
-        const [loading, setLoading] = useState(false);
-        const [formValues, setFormValues] = useState({
-            nombre: '',
-            stock: '',
-            categoria: '',
-            precio: '',
-            descripcion: '',
-            foto: null,
-        });
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const [proveedores, setProveedores] = useState([]);
+    const [error, setError] = useState(false);
+    const [formValues, setFormValues] = useState({
+        nombre: '',
+        stock: '',
+        categoria: '',
+        precio: '',
+        descripcion: '',
+        proveedor: ''
+    });
+    const [formFoto, setFormFoto] = useState(null);
 
-        const handleInputChange = (event) => {
-            const { name, value } = event.target;
-            setFormValues((prevValues) => ({
-                ...prevValues,
-                [name]: value,
-            }));
-        };
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            [name]: value,
+        }));
+    };
 
-        const handlePhotoChange = (photoData) => {
-            setFormValues((prevValues) => ({
-                ...prevValues,
-                foto: photoData,
-            }));
-        };
+    const handlePhotoChange = (photoData) => {
+        setFormFoto(photoData)
+    };
 
-        const handleGuardar = async (event) => {
-            event.preventDefault();
-            setLoading(true);
-            const formData = new FormData();
-            const correo = (JSON.parse(localStorage.getItem('login'))).correo;
-            formData.append('nombre', formValues.nombre);
-            formData.append('stock', formValues.stock);
-            formData.append('categoriaId', formValues.categoria);
-            formData.append('precio', formValues.precio);
-            formData.append('foto', formValues.foto);
-            formData.append('descripcion', formValues.descripcion);
-            formData.append('usuarioId', correo)
-            const response = await apiRestPost('producto', formData)
-            if (response.nombre) {
-                router.push('/admin/clothes/consulta')
-                setLoading(false)
-            }
-        };
-
-        const getData = async () => {
-            const response = await apiRestGet('producto/buscar?codigo='+router.query.id);
-            setFormValues(response);
-            setFormValues((prevValues) => ({
-                ...prevValues,
-                categoria: response.categoriaId,
-            }));
+    const handleGuardar = async (event) => {
+        event.preventDefault();
+        setLoading(true);
+        setError(false)
+        const formData = new FormData();
+        formData.append('nombre', formValues.nombre);
+        formData.append('stock', formValues.stock);
+        formData.append('categoriaId', formValues.categoria);
+        formData.append('precio', formValues.precio);
+        formData.append('foto', formFoto);
+        formData.append('descripcion', formValues.descripcion);
+        formData.append('proveedorId', formValues.proveedor)
+        const response = await apiRestPost('producto', formData)
+        if (response.nombre) {
+            router.push('/admin/clothes/consulta')
+            setLoading(false)
         }
+        setError(true)
+    };
 
-        
+    const consultarProveedores = async () => {
+        const response = await apiRestGet('proveedor');
+        if (response.length > 0) {
+            setProveedores(response);
+        }
+    }
 
-        useEffect(() => {
-            if (router.query.id) {
-                getData()
-            }
-        }, [router.query.id])
-        return <Layout>
-            {loading ? <LoadingModal /> : null}
-            <div className={styles.container}>
-                <h2>Registro Ropa</h2>
-                <form className={styles.formContainer}>
-                    <PhotoUploader onPhotoChange={handlePhotoChange} value={formValues.foto}/>
-                    <InputGroup label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre}/>
-                    <InputGroup label="Descripcion" onChange={handleInputChange} name="descripcion" value={formValues.descripcion}/>
-                    <InputGroup label="Stock" onChange={handleInputChange} name="stock" value={formValues.stock}/>
-                    <select name="categoria" id="" onChange={handleInputChange} value={formValues.categoria}>
+    const getData = async () => {
+        const response = await apiRestGet('producto/buscar?codigo=' + router.query.id);
+        setFormValues(response);
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            categoria: response.categoriaId,
+        }));
+    }
+
+    useEffect(() => {
+        consultarProveedores();
+    }, [])
+
+    useEffect(() => {
+        if (router.query.id) {
+            getData()
+        }
+    }, [router.query.id])
+    return <Layout>
+        {loading ? <LoadingModal /> : null}
+        <div className={styles.container}>
+            <h2>Registro Ropa</h2>
+            <form className={styles.formContainer}>
+                <PhotoUploader onPhotoChange={handlePhotoChange} value={formFoto} />
+                <InputGroup label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre} />
+                <InputGroup label="Descripcion" onChange={handleInputChange} name="descripcion" value={formValues.descripcion} />
+                <InputGroup label="Stock" onChange={handleInputChange} name="stock" value={formValues.stock} />
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <label htmlFor="categoria">Categoria</label>
+                    <select name="categoria" id="categoria" onChange={handleInputChange} value={formValues.categoria}>
                         <option value={null} selected>Seleccionar</option>
                         <option value={1}>Camisas</option>
                         <option value={2}>Chaquetas</option>
@@ -88,11 +100,23 @@ const RegistroClothes = () => {
                         <option value={5}>Sudaderas</option>
                         <option value={6}>Vestidos</option>
                     </select>
-                    <InputGroup label="Precio" onChange={handleInputChange} name="precio" value={formValues.precio}/>
-                    <button onClick={handleGuardar}>Guardar</button>
-                </form>
-            </div>
-        </Layout>
-    }
+                </div>
 
-    export default RegistroClothes;
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <label htmlFor="proveedor">Proveedor</label>
+                    <select name="proveedor" id="proveedor" onChange={handleInputChange} value={formValues.proveedor}>
+                        <option value={null} selected>Seleccionar</option>
+                        {proveedores?.map((item, key) => {
+                            return <option key={key} value={item.nit}>{item.nombre} {item.apellido}</option>
+                        })}
+                    </select>
+                </div>
+                <InputGroup label="Precio" onChange={handleInputChange} name="precio" value={formValues.precio} />
+                {error && <p>No se pudo guardar el producto, intente mas tarde</p>}
+                <button onClick={handleGuardar}>Guardar</button>
+            </form>
+        </div>
+    </Layout>
+}
+
+export default RegistroClothes;

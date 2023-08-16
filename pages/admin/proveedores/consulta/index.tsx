@@ -7,10 +7,10 @@ import Layout from "../../../../components/layout";
 const ConsultaProveedores = () => {
 
     const [consultas, setConsultas] = useState([]);
-    const columnasTabla = ['cedula', 'nombre', 'genero', 'correo', 'telefono'];
+    const columnasTabla = ['nit', 'nombre', 'correo', 'telefono'];
 
     const getConsultas = async () => {
-        const response = await apiRestGet('usuario')
+        const response = await apiRestGet('proveedor')
         if (response.length > 0) {
             setConsultas(response)
         }
