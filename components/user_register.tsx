@@ -52,7 +52,7 @@ const UserRegister = ({title, isProveedor = false}: Props) => {
         };
 
         if (!isProveedor) {
-            jsonData.rolId = 2
+            jsonData.rolId = 3
         } 
         const response = await apiRestPost(isProveedor ? 'proveedor' :'usuario', jsonData)
         if (response.correo && !isProveedor){
