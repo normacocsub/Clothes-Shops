@@ -21,13 +21,19 @@ const RegistroClothes = () => {
         descripcion: '',
         proveedor: ''
     });
+    const [isFormValid, setIsFormValid] = useState(false);
     const [formFoto, setFormFoto] = useState(null);
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event, isValid) => {
         const { name, value } = event.target;
         setFormValues((prevValues) => ({
             ...prevValues,
             [name]: value,
+        }));
+
+        setIsFormValid((prevIsFormValid: any) => ({
+            ...prevIsFormValid,
+            [name]: isValid,
         }));
     };
 
@@ -51,6 +57,7 @@ const RegistroClothes = () => {
         if (response.nombre) {
             router.push('/admin/clothes/consulta')
             setLoading(false)
+            return
         }
         setError(true)
     };
@@ -69,6 +76,8 @@ const RegistroClothes = () => {
             ...prevValues,
             categoria: response.categoriaId,
         }));
+
+        
     }
 
     useEffect(() => {
@@ -86,12 +95,15 @@ const RegistroClothes = () => {
             <h2>Registro Ropa</h2>
             <form className={styles.formContainer}>
                 <PhotoUploader onPhotoChange={handlePhotoChange} value={formFoto} />
-                <InputGroup label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre} />
-                <InputGroup label="Descripcion" onChange={handleInputChange} name="descripcion" value={formValues.descripcion} />
-                <InputGroup label="Stock" onChange={handleInputChange} name="stock" value={formValues.stock} />
+                <InputGroup label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre} 
+                    required max={25} min={4}/>
+                <InputGroup label="Descripcion" onChange={handleInputChange} name="descripcion" value={formValues.descripcion} 
+                    required max={50} min={10}/>
+                <InputGroup label="Stock" onChange={handleInputChange} name="stock" value={formValues.stock} 
+                    required min={5} type="number"/>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <label htmlFor="categoria">Categoria</label>
-                    <select name="categoria" id="categoria" onChange={handleInputChange} value={formValues.categoria}>
+                    <select name="categoria" id="categoria" onChange={(e) => handleInputChange(e, true)} value={formValues.categoria}>
                         <option value={null} selected>Seleccionar</option>
                         <option value={1}>Camisas</option>
                         <option value={2}>Chaquetas</option>
@@ -104,16 +116,17 @@ const RegistroClothes = () => {
 
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <label htmlFor="proveedor">Proveedor</label>
-                    <select name="proveedor" id="proveedor" onChange={handleInputChange} value={formValues.proveedor}>
+                    <select name="proveedor" id="proveedor" onChange={(e) => handleInputChange(e, true)} value={formValues.proveedor}>
                         <option value={null} selected>Seleccionar</option>
                         {proveedores?.map((item, key) => {
                             return <option key={key} value={item.nit}>{item.nombre} {item.apellido}</option>
                         })}
                     </select>
                 </div>
-                <InputGroup label="Precio" onChange={handleInputChange} name="precio" value={formValues.precio} />
+                <InputGroup label="Precio" onChange={handleInputChange} name="precio" value={formValues.precio} 
+                    required min={1} type="number"/>
                 {error && <p>No se pudo guardar el producto, intente mas tarde</p>}
-                <button onClick={handleGuardar}>Guardar</button>
+                <button onClick={handleGuardar} disabled={!formFoto ? true : !isFormValid}>Guardar</button>
             </form>
         </div>
     </Layout>

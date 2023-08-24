@@ -59,6 +59,12 @@ const Carrito = () => {
         }
     }
 
+    const deleteProduct = (index) => {
+        const carritoD = [...carrito];
+        carritoD.splice(index, 1);
+        setCarrito(carritoD);
+    }
+
     const handleReduce = (index) => {
         if (carrito[index].cantidad > 0) {
             const updatedCarrito = [...carrito];
@@ -126,7 +132,7 @@ const Carrito = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <BsXCircle className={styles.iconDelete} />
+                                <BsXCircle className={styles.iconDelete} onClick={() => deleteProduct(index)}/>
                             </div>
                         })
                     }
@@ -139,8 +145,9 @@ const Carrito = () => {
                         currency: 'COP',
                     })}
                 </div>
-                <div>
+                <div className={styles.buttons}>
                     <button onClick={confirmCompra}>Comprar</button>
+                    <button onClick={() => router.push('/clothets')}>Seguir Compra</button>
                 </div>
             </div>
         </div>

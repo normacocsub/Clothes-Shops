@@ -84,19 +84,35 @@
         font-size: 25px;
         font-weight: bold;
         align-items: center;
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
         button {
             height: 50px;
             width: 200px;
             font-size: 20px;
             font-weight: bold;
-            background-color: rgb(238,174,202);
-            border: none;
+            
             border-radius: 16px;
             cursor: pointer;
         }
-        button:hover {
+        button:first-child {
+            background-color: rgb(238,174,202);
+            border: none;
+        }
+        button:last-child {
             background-color: white;
             border: 1px solid rgb(238,174,202);
+        }
+        button:first-child:hover {
+            background-color: white;
+            border: 1px solid rgb(238,174,202);
+        }
+        button:last-child:hover {
+            background-color: rgb(238,174,202);
+            border: 1px solid white;
         }
     }
 }

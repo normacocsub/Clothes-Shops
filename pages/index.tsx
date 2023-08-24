@@ -23,7 +23,9 @@ export default function Home() {
           <div className={styles.textoContainer}>
             <h1 className={styles.textoTitulo}>Tienda de Ropa</h1>
             <h2 className={styles.textoSubTitulo}>Descubre las últimas tendencias</h2>
-            <button onClick={() => router.push('/clothets')}>Explorar</button>
+            <button style={{
+              cursor: 'pointer'
+            }} onClick={() => router.push('/clothets')}>Explorar</button>
           </div>
         </div>
 

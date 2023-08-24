@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styles from '../styles/components/input_group.module.scss'
 
 
@@ -8,19 +9,61 @@ interface Props {
     type?: string
     id?: string
     name?: string
-    required?: boolean
+    required: boolean
+    max?: number;
+    min?: number;
 }
-const InputGroup = ({label, value, onChange, type, id, name}: Props) => {
+const InputGroup = ({ label, value, onChange, type, id, name, required, max, min }: Props) => {
 
+    const [valid, setValid] = useState(false);
     const handleChange = (e: any) => {
-        onChange(e);
+        const validate = isValid()
+        setValid(validate)
+        onChange(e, validate);
     }
 
-    
+
+
+
+
+    const isValid = () => {
+        if (required && (!value || value.trim() === '')) {
+            return false;
+        }
+
+        if (max !== undefined && value && value.length > max) {
+            return false;
+        }
+
+        if (min !== undefined && value && value.length < min) {
+            return false;
+        }
+
+        if (type === 'email' && value && !/\S+@\S+\.\S+/.test(value)) {
+            return false;
+        }
+
+        if (type === 'password' && value) {
+            const uppercaseRegex = /[A-Z]/;
+            const digitRegex = /\d/;
+            const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
+            const hasUppercase = uppercaseRegex.test(value);
+            const hasDigit = digitRegex.test(value);
+            const hasSpecialChar = specialCharRegex.test(value);
+
+            if (!(hasUppercase && hasDigit && hasSpecialChar)) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+
     return <div className={styles.formGroup}>
-        <input type={type ?? 'text'} id={id ?? label} name={name ?? label} 
-        required={true} value={value ?? ''}  onChange={(e: any) => handleChange(e)}/>
-        <label htmlFor={id ?? label}>{label}</label>
+        <input type={type ?? 'text'} id={id ?? label} name={name ?? label}
+            required={true} value={value ?? ''} onChange={(e: any) => handleChange(e)} className={!isValid() ? styles.invalid : ''} />
+        <label htmlFor={id ?? label} className={required ? 'required' : ''}>{label}</label>
     </div>
 }
 
