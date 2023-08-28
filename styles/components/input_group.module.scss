@@ -2,7 +2,7 @@
     position: relative;
     margin-bottom: 20px;
     .invalid {
-      border: 2px solid red;
+      border: 2px solid red !important;
     }
     input {
         width: 100%;

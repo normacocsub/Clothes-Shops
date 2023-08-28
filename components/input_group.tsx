@@ -16,6 +16,7 @@ interface Props {
 const InputGroup = ({ label, value, onChange, type, id, name, required, max, min }: Props) => {
 
     const [valid, setValid] = useState(false);
+    const [touch, setTouch] = useState(false)
     const handleChange = (e: any) => {
         const validate = isValid()
         setValid(validate)
@@ -24,9 +25,14 @@ const InputGroup = ({ label, value, onChange, type, id, name, required, max, min
 
 
 
-
+    const onTouch = () => {
+        setTouch(true)
+    }
 
     const isValid = () => {
+        if (!touch) {
+            return true
+        }
         if (required && (!value || value.trim() === '')) {
             return false;
         }
@@ -34,7 +40,7 @@ const InputGroup = ({ label, value, onChange, type, id, name, required, max, min
         if (max !== undefined && value && value.length > max) {
             return false;
         }
-
+        
         if (min !== undefined && value && value.length < min) {
             return false;
         }
@@ -59,9 +65,11 @@ const InputGroup = ({ label, value, onChange, type, id, name, required, max, min
         return true;
     };
 
+    
+
 
     return <div className={styles.formGroup}>
-        <input type={type ?? 'text'} id={id ?? label} name={name ?? label}
+        <input type={type ?? 'text'} id={id ?? label} name={name ?? label} onClick={onTouch}
             required={true} value={value ?? ''} onChange={(e: any) => handleChange(e)} className={!isValid() ? styles.invalid : ''} />
         <label htmlFor={id ?? label} className={required ? 'required' : ''}>{label}</label>
     </div>

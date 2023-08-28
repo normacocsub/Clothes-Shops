@@ -97,9 +97,10 @@ const Carrito = () => {
     }, [])
 
     useEffect(() => {
-        setTotal(0)
+        let totalCarrito = 0;
         carrito.forEach(element => {
-            setTotal(Number(element.precio) + total)
+            totalCarrito += Number(element.precio * element.cantidad)
+            setTotal(totalCarrito)
         });
     }, [carrito])
     return <div className={styles.content}>

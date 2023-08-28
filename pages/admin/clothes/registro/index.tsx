@@ -21,7 +21,14 @@ const RegistroClothes = () => {
         descripcion: '',
         proveedor: ''
     });
-    const [isFormValid, setIsFormValid] = useState(false);
+    const [isFormValid, setIsFormValid] = useState({
+        nombre: false,
+        stock: false,
+        categoria: false,
+        precio: false,
+        descripcion: false,
+        proveedor: false
+    });
     const [formFoto, setFormFoto] = useState(null);
 
     const handleInputChange = (event, isValid) => {
@@ -35,6 +42,15 @@ const RegistroClothes = () => {
             ...prevIsFormValid,
             [name]: isValid,
         }));
+    };
+
+    const calculateFormValidity = () => {
+        for (const [name, isValid] of Object.entries(isFormValid)) {
+            if (!isValid) {
+                return false;
+            }
+        }
+        return true;
     };
 
     const handlePhotoChange = (photoData) => {
@@ -77,7 +93,7 @@ const RegistroClothes = () => {
             categoria: response.categoriaId,
         }));
 
-        
+
     }
 
     useEffect(() => {
@@ -95,12 +111,12 @@ const RegistroClothes = () => {
             <h2>Registro Ropa</h2>
             <form className={styles.formContainer}>
                 <PhotoUploader onPhotoChange={handlePhotoChange} value={formFoto} />
-                <InputGroup label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre} 
-                    required max={25} min={4}/>
-                <InputGroup label="Descripcion" onChange={handleInputChange} name="descripcion" value={formValues.descripcion} 
-                    required max={50} min={10}/>
-                <InputGroup label="Stock" onChange={handleInputChange} name="stock" value={formValues.stock} 
-                    required min={5} type="number"/>
+                <InputGroup label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre}
+                    required max={25} min={4} />
+                <InputGroup label="Descripcion" onChange={handleInputChange} name="descripcion" value={formValues.descripcion}
+                    required max={50} min={10} />
+                <InputGroup label="Stock" onChange={handleInputChange} name="stock" value={formValues.stock}
+                    required min={5} type="number" />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <label htmlFor="categoria">Categoria</label>
                     <select name="categoria" id="categoria" onChange={(e) => handleInputChange(e, true)} value={formValues.categoria}>
@@ -123,10 +139,10 @@ const RegistroClothes = () => {
                         })}
                     </select>
                 </div>
-                <InputGroup label="Precio" onChange={handleInputChange} name="precio" value={formValues.precio} 
-                    required min={1} type="number"/>
+                <InputGroup label="Precio" onChange={handleInputChange} name="precio" value={formValues.precio}
+                    required min={1} type="number" />
                 {error && <p>No se pudo guardar el producto, intente mas tarde</p>}
-                <button onClick={handleGuardar} disabled={!formFoto ? true : !isFormValid}>Guardar</button>
+                <button onClick={handleGuardar} disabled={!formFoto ? true : !calculateFormValidity()}>Guardar</button>
             </form>
         </div>
     </Layout>

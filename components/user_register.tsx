@@ -14,7 +14,16 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
-    const [isFormValid, setIsFormValid] = useState(false);
+    const [isFormValid, setIsFormValid] = useState({
+        cedula: false,
+        nombre: false,
+        apellido: false,
+        direccion: false,
+        ciudad: false,
+        correo: false,
+        password: false,
+        nit: false
+    });
     const [formValues, setFormValues] = useState({
         cedula: '',
         nombre: '',
@@ -26,6 +35,15 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
         password: '',
         nit: ''
     });
+
+    const calculateFormValidity = () => {
+        for (const [name, isValid] of Object.entries(isFormValid)) {
+            if (!isValid) {
+                return false;
+            }
+        }
+        return true;
+    };
 
     const handleInputChange = (event, isValid) => {
         const { name, value } = event.target;
@@ -94,7 +112,7 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
             {!isProveedor && <InputGroup label="Password" onChange={handleInputChange} name="password" type="password" value={formValues.password}
                 required min={7} max={20} />}
             {error && <p>Fallo al guardar intente mas tarde</p>}
-            <button onClick={handleGuardar} disabled={!isFormValid}>Registrar</button>
+            <button onClick={handleGuardar} disabled={!calculateFormValidity()}>Registrar</button>
         </form>
     </div>
 }
