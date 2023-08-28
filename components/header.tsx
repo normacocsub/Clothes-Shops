@@ -118,6 +118,7 @@ const Header = () => {
                     {!login && <span onClick={() => router.push('/login')}>Log in</span>}
                     {login && <span onClick={logOut}>Log Out</span>}
                     {rol === 3 && <span onClick={() => router.push('/carrito')}>Carrito</span>}
+                    {rol === 3 && <span onClick={() => router.push('/compras/mis_compras')}>Mis Compras</span>}
                 </div>
             </div>
         </nav>
