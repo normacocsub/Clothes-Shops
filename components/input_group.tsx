@@ -40,7 +40,7 @@ const InputGroup = ({ label, value, onChange, type, id, name, required, max, min
         if (max !== undefined && value && value.length > max) {
             return false;
         }
-        
+
         if (min !== undefined && value && value.length < min) {
             return false;
         }
@@ -65,13 +65,15 @@ const InputGroup = ({ label, value, onChange, type, id, name, required, max, min
         return true;
     };
 
-    
+
 
 
     return <div className={styles.formGroup}>
         <input type={type ?? 'text'} id={id ?? label} name={name ?? label} onClick={onTouch}
             required={true} value={value ?? ''} onChange={(e: any) => handleChange(e)} className={!isValid() ? styles.invalid : ''} />
-        <label htmlFor={id ?? label} className={required ? 'required' : ''}>{label}</label>
+        <label htmlFor={id ?? label} className={required ? 'required' : ''}>{label} {required && <span style={{
+            color: 'red'
+        }}>*</span>}</label>
     </div>
 }
 

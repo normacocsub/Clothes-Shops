@@ -37,7 +37,13 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
     });
 
     const calculateFormValidity = () => {
-        for (const [name, isValid] of Object.entries(isFormValid)) {
+        const valuesD = {...isFormValid}
+        if (!isProveedor) {
+            delete valuesD.nit;
+        } else {
+            delete valuesD.cedula;
+        }
+        for (const [name, isValid] of Object.entries(valuesD)) {
             if (!isValid) {
                 return false;
             }
