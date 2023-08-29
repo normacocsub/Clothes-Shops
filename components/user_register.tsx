@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/components/user_register.module.scss"
 import InputGroup from "./input_group";
 import { apiRestPost } from "../services/auth";
@@ -14,6 +14,7 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
+    const [valid, setValid] = useState(false)
     const [isFormValid, setIsFormValid] = useState({
         cedula: false,
         nombre: false,
@@ -43,11 +44,15 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
         } else {
             delete valuesD.cedula;
         }
+        
         for (const [name, isValid] of Object.entries(valuesD)) {
             if (!isValid) {
+                setValid(false)
                 return false;
+                
             }
         }
+        setValid(true)
         return true;
     };
 
@@ -57,11 +62,13 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
             ...prevValues,
             [name]: value,
         }));
-
+        
         setIsFormValid((prevIsFormValid: any) => ({
             ...prevIsFormValid,
             [name]: isValid,
         }));
+        console.log(isFormValid, name, value, isValid)
+        calculateFormValidity()
     };
 
     const handleGuardar = async (event) => {
@@ -97,6 +104,7 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
         }
         setError(true)
     };
+
     return <div className={styles.content}>
         {loading ? <LoadingModal /> : null}
         <h2>{title}</h2>
@@ -110,7 +118,7 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
             <InputGroup label="Direccion" onChange={handleInputChange} name="direccion" value={formValues.direccion}
                 required min={10} max={30} />
             <InputGroup label="Telefono" onChange={handleInputChange} name="telefono" value={formValues.telefono}
-                min={10} max={10} type="number" required={false} />
+                ext={10} type="number" required={false} />
             <InputGroup label="Ciudad" onChange={handleInputChange} name="ciudad" value={formValues.ciudad}
                 required min={3} max={20} />
             <InputGroup label="Correo" onChange={handleInputChange} name="correo" value={formValues.correo}
@@ -118,7 +126,7 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
             {!isProveedor && <InputGroup label="Password" onChange={handleInputChange} name="password" type="password" value={formValues.password}
                 required min={7} max={20} />}
             {error && <p>Fallo al guardar intente mas tarde</p>}
-            <button onClick={handleGuardar} disabled={!calculateFormValidity()}>Registrar</button>
+            <button onClick={handleGuardar} disabled={!valid}>Registrar</button>
         </form>
     </div>
 }
