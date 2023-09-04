@@ -13,8 +13,9 @@ interface Props {
     max?: number;
     min?: number;
     ext?: number;
+    noNums?: boolean
 }
-const InputGroup = ({ label, value, onChange, type, id, name, required, max, min, ext }: Props) => {
+const InputGroup = ({ label, value, onChange, type, id, name, required, max, min, ext, noNums }: Props) => {
 
     const [valid, setValid] = useState(false);
     const [touch, setTouch] = useState(false)
@@ -30,10 +31,10 @@ const InputGroup = ({ label, value, onChange, type, id, name, required, max, min
 
     const isValid =  (valueChange) => {
         if (!touch) {
-            if (value.length > 0 && min !== undefined && min > value ) return false
+            if (valueChange.length > 0 && min !== undefined && min > valueChange ) return false
             return true
         } 
-        if (!required) {
+        if (!required && !valueChange) {
             return true
         }
         if (valueChange?.trim() === '' ) {
@@ -70,6 +71,13 @@ const InputGroup = ({ label, value, onChange, type, id, name, required, max, min
 
             if (!(hasUppercase && hasDigit && hasSpecialChar)) {
                 return false;
+            }
+        }
+
+        if (noNums) {
+            const textRegex = /^[A-Za-z\s]+$/;
+            if (!textRegex.test(valueChange)) {
+            return false;
             }
         }
         

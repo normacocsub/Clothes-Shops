@@ -69,7 +69,7 @@ const Login = () => {
                     <InputGroup label='Correo' name='correo' onChange={handleInputChange} value={formValues.correo} 
                         required min={15} max={30} type='email'/>
                     <InputGroup label='Password' type='password' name='password' onChange={handleInputChange} value={formValues.password}
-                        required />
+                        required min={9} max={20}/>
                     {error && <p style={{
                         fontSize: '16px',
                         color: 'red'
