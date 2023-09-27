@@ -43,8 +43,9 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
             delete valuesD.nit;
         } else {
             delete valuesD.cedula;
+            delete valuesD.password;
         }
-        
+        console.log(valuesD);
         for (const [name, isValid] of Object.entries(valuesD)) {
             if (!isValid) {
                 setValid(false)
@@ -109,24 +110,24 @@ const UserRegister = ({ title, isProveedor = false }: Props) => {
         {loading ? <LoadingModal /> : null}
         <h2>{title}</h2>
         <form action="" className={styles.formContainer}>
-            <InputGroup label={isProveedor ? "NIT" : "Cedula"} onChange={handleInputChange} name={isProveedor ? "nit" : "cedula"}
+            <InputGroup id="id" label={isProveedor ? "NIT" : "Cedula"} onChange={handleInputChange} name={isProveedor ? "nit" : "cedula"}
                 value={isProveedor ? formValues.nit : formValues.cedula} required max={10} min={8} type="number"/>
-            <InputGroup label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre}
+            <InputGroup id="nombre" label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre}
                 required min={3} max={20} noNums={true}/>
-            <InputGroup label="Apellido" onChange={handleInputChange} name="apellido" value={formValues.apellido}
+            <InputGroup id="apellido" label="Apellido" onChange={handleInputChange} name="apellido" value={formValues.apellido}
                 required min={3} max={20}  noNums={true}/>
-            <InputGroup label="Direccion" onChange={handleInputChange} name="direccion" value={formValues.direccion}
+            <InputGroup id="direccion" label="Direccion" onChange={handleInputChange} name="direccion" value={formValues.direccion}
                 required min={10} max={30} />
-            <InputGroup label="Telefono" onChange={handleInputChange} name="telefono" value={formValues.telefono}
+            <InputGroup id="telefono" label="Telefono" onChange={handleInputChange} name="telefono" value={formValues.telefono}
                 ext={10} type="number" required={false} />
-            <InputGroup label="Ciudad" onChange={handleInputChange} name="ciudad" value={formValues.ciudad}
+            <InputGroup id="ciudad" label="Ciudad" onChange={handleInputChange} name="ciudad" value={formValues.ciudad}
                 required min={3} max={20} noNums={true}/>
-            <InputGroup label="Correo" onChange={handleInputChange} name="correo" value={formValues.correo}
+            <InputGroup id="correo" label="Correo" onChange={handleInputChange} name="correo" value={formValues.correo}
                 required min={15} max={30} type="email" />
-            {!isProveedor && <InputGroup label="Password" onChange={handleInputChange} name="password" type="password" value={formValues.password}
+            {!isProveedor && <InputGroup id="password" label="Password" onChange={handleInputChange} name="password" type="password" value={formValues.password}
                 required min={7} max={20} />}
             {error && <p>Fallo al guardar intente mas tarde</p>}
-            <button onClick={handleGuardar} disabled={!valid}>Registrar</button>
+            <button id="guardar" onClick={handleGuardar} disabled={!valid}>Registrar</button>
         </form>
     </div>
 }

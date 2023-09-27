@@ -111,11 +111,11 @@ const RegistroClothes = () => {
             <h2>Registro Ropa</h2>
             <form className={styles.formContainer}>
                 <PhotoUploader onPhotoChange={handlePhotoChange} value={formFoto} />
-                <InputGroup label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre}
+                <InputGroup id="nombre" label="Nombre" onChange={handleInputChange} name="nombre" value={formValues.nombre}
                     required max={25} min={4} />
-                <InputGroup label="Descripcion" onChange={handleInputChange} name="descripcion" value={formValues.descripcion}
+                <InputGroup id="descripcion" label="Descripcion" onChange={handleInputChange} name="descripcion" value={formValues.descripcion}
                     required max={50} min={10} />
-                <InputGroup label="Stock" onChange={handleInputChange} name="stock" value={formValues.stock}
+                <InputGroup id="stock" label="Stock" onChange={handleInputChange} name="stock" value={formValues.stock}
                     required min={5} type="number" />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <label htmlFor="categoria">Categoria</label>
@@ -132,17 +132,17 @@ const RegistroClothes = () => {
 
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <label htmlFor="proveedor">Proveedor</label>
-                    <select name="proveedor" id="proveedor" onChange={(e) => handleInputChange(e, true)} value={formValues.proveedor}>
+                    <select name="proveedor" id="proveedorSelect" onChange={(e) => handleInputChange(e, true)} value={formValues.proveedor}>
                         <option value={null} selected>Seleccionar</option>
                         {proveedores?.map((item, key) => {
                             return <option key={key} value={item.nit}>{item.nombre} {item.apellido}</option>
                         })}
                     </select>
                 </div>
-                <InputGroup label="Precio" onChange={handleInputChange} name="precio" value={formValues.precio}
+                <InputGroup label="Precio" id="precio" onChange={handleInputChange} name="precio" value={formValues.precio}
                     required min={1} type="number" />
                 {error && <p>No se pudo guardar el producto, intente mas tarde</p>}
-                <button onClick={handleGuardar} disabled={!formFoto ? true : !calculateFormValidity()}>Guardar</button>
+                <button id="registro" onClick={handleGuardar} disabled={!formFoto ? true : !calculateFormValidity()}>Guardar</button>
             </form>
         </div>
     </Layout>

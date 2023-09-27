@@ -66,19 +66,19 @@ const Login = () => {
             <div className={styles.contentSection}>
                 <h3>Iniciar Sesión</h3>
                 <form >
-                    <InputGroup label='Correo' name='correo' onChange={handleInputChange} value={formValues.correo} 
+                    <InputGroup id='email' label='Correo' name='correo' onChange={handleInputChange} value={formValues.correo} 
                         required min={15} max={30} type='email'/>
-                    <InputGroup label='Password' type='password' name='password' onChange={handleInputChange} value={formValues.password}
-                        required min={9} max={20}/>
+                    <InputGroup id='password' label='Password' type='password' name='password' onChange={handleInputChange} value={formValues.password}
+                        required min={8} max={20}/>
                     {error && <p style={{
                         fontSize: '16px',
                         color: 'red'
                     }}>Error al iniciar sesion, credenciales incorrectas</p>}
-                    <button onClick={handleGuardar} type={'submit'} disabled={!isFormValid}>Login</button>
+                    <button id='login' onClick={handleGuardar} type={'submit'} disabled={!isFormValid}>Login</button>
                 </form>
             </div>
 
-            <span onClick={() => router.push('/registro')}>Registrarse</span>
+            <span id='registro' onClick={() => router.push('/registro')}>Registrarse</span>
 
 
         </section>

@@ -61,7 +61,7 @@ const Header = () => {
                                 onMouseEnter={(e) => handleMouseEnter(1, e)}
                                 className={styles.liSDropw}
                             >
-                                <a href="#">Ropa</a>
+                                <a href="#" id='ropa'>Ropa</a>
                                 {isSubMenuVisible && activeSubMenu === 1 && (
                                     <div
                                         className={styles.dropdown}
@@ -88,7 +88,7 @@ const Header = () => {
                                     onMouseEnter={(e) => handleMouseEnter(2, e)}
                                     className={styles.liSDropw}
                                 >
-                                    <a href="#">Proveedores</a>
+                                    <a href="#" id='proveedor'>Proveedores</a>
                                     {isSubMenuVisible && activeSubMenu === 2 && (
                                         <div
                                             className={styles.dropdown}
@@ -98,9 +98,9 @@ const Header = () => {
                                             }}
                                         >
                                             {/* Aquí puedes agregar más elementos para el menú desplegable de "Marcas" */}
-                                            <ul onMouseLeave={handleMouseLeave}>
-                                                <li className={styles.liS}>
-                                                    <Link href="/admin/proveedores/registro">Registrar Proveedor</Link>
+                                            <ul onMouseLeave={handleMouseLeave} id='register-proveedor'>
+                                                <li className={styles.liS} >
+                                                    <Link href="/admin/proveedores/registro" >Registrar Proveedor</Link>
                                                 </li>
                                                 <li className={styles.liS}>
                                                     <Link href="/admin/proveedores/consulta">Consultar Proveedores</Link>
@@ -115,7 +115,7 @@ const Header = () => {
                 </div>
                 <div className={styles.secondSectionMenu}>
                     <input type="search" placeholder='Search' />
-                    {!login && <span onClick={() => router.push('/login')}>Log in</span>}
+                    {!login && <span id='login-button' onClick={() => router.push('/login')}>Log in</span>}
                     {login && <span onClick={logOut}>Log Out</span>}
                     {rol === 3 && <span onClick={() => router.push('/carrito')}>Carrito</span>}
                     {rol === 3 && <span onClick={() => router.push('/compras/mis_compras')}>Mis Compras</span>}

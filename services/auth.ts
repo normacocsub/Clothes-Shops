@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://localhost:7242/api/'
+axios.defaults.baseURL = 'http://localhost:5165/api/'
 
 async function getRequestHeaders() {
   try {
