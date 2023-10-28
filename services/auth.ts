@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:5165/api/'
+axios.defaults.baseURL = 'https://clothe-backend-8020c1e86185.herokuapp.com/api/'
 
 async function getRequestHeaders() {
   try {
