@@ -116,7 +116,7 @@ const RegistroClothes = () => {
                 <InputGroup id="descripcion" label="Descripcion" onChange={handleInputChange} name="descripcion" value={formValues.descripcion}
                     required max={50} min={10} />
                 <InputGroup id="stock" label="Stock" onChange={handleInputChange} name="stock" value={formValues.stock}
-                    required min={5} type="number" />
+                    required min={1} type="number" />
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <label htmlFor="categoria">Categoria</label>
                     <select name="categoria" id="categoria" onChange={(e) => handleInputChange(e, true)} value={formValues.categoria}>
