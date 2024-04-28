@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://clothe-backend-8020c1e86185.herokuapp.com/api/'
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_URL ?? ''
 
 async function getRequestHeaders() {
   try {
