@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_URL
-
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_URL ?? ''
 async function getRequestHeaders() {
   try {
     return {
